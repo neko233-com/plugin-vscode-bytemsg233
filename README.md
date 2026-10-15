@@ -14,11 +14,17 @@ Public source: https://github.com/neko233-com/plugin-vscode-bytemsg233
 
 ## 发布状态（2026-10-15）
 
-1.1.0 已通过 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/tag/v1.1.0) 公开提供 VSIX。VS Code Marketplace 尚未上架，请使用 VSIX 安装。
+1.1.0 已在 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=neko233-com.bytemsg233) 正式上架，也通过 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/tag/v1.1.0) 提供离线 VSIX。
 
 ## 安装
 
-从 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/latest) 下载 VSIX 后，使用 Extensions → Install from VSIX，或 `code --install-extension bytemsg233-1.1.0.vsix`。
+在 Extensions 中搜索 `neko233-com.bytemsg233`，或运行：
+
+```sh
+code --install-extension neko233-com.bytemsg233
+```
+
+离线安装：从 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/latest) 下载 VSIX，使用 Extensions → Install from VSIX，或 `code --install-extension bytemsg233-1.1.0.vsix`。
 
 安装 **ByteMsg233 CLI v1.1.3+**，使用 [主仓库发行包](https://github.com/neko233-com/bytemsg233/releases/latest)，或：
 
