@@ -12,6 +12,10 @@ Public source: https://github.com/neko233-com/plugin-vscode-bytemsg233
 - 生成前保存当前文件，保存失败则停止；校验和格式化使用 stdin，不创建临时协议文件。
 - CLI 直接接收参数，路径含空格也可使用。只在受信任的工作区 / 项目运行 CLI。高亮、补全、类型导航无需 CLI。
 
+## 发布状态（2026-10-15）
+
+1.1.0 已通过 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/tag/v1.1.0) 公开提供 VSIX。VS Code Marketplace 尚未上架，请使用 VSIX 安装。
+
 ## 安装
 
 从 [GitHub Releases](https://github.com/neko233-com/plugin-vscode-bytemsg233/releases/latest) 下载 VSIX 后，使用 Extensions → Install from VSIX，或 `code --install-extension bytemsg233-1.1.0.vsix`。
