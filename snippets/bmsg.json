@@ -1,0 +1,19 @@
+{
+  "Message": {
+    "prefix": "message",
+    "body": [
+      "message ${1:Hero} {",
+      "  uint32 id = 1",
+      "  ${0}",
+      "}"
+    ]
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:State} {",
+      "  ${2:IDLE} = 0",
+      "}"
+    ]
+  }
+}

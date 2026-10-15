@@ -1,156 +1,49 @@
 {
-  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "ByteMsg233",
   "scopeName": "source.bmsg",
   "patterns": [
-    { "include": "#comment" },
-    { "include": "#i18n-annotation" },
-    { "include": "#keywords" },
-    { "include": "#generic-types" },
-    { "include": "#types" },
-    { "include": "#enum-body" },
-    { "include": "#message-body" },
-    { "include": "#strings" },
-    { "include": "#numbers" },
-    { "include": "#equals" },
-    { "include": "#tag-number" }
-  ],
-  "repository": {
-    "comment": {
+    {
+      "name": "comment.line.double-slash.bmsg",
+      "match": "//.*$"
+    },
+    {
+      "name": "string.quoted.double.bmsg",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "name": "comment.line.double-slash.bmsg",
-          "match": "(?!.*\".*)(//.*)$",
-          "captures": {
-            "1": {
-              "name": "comment.line.double-slash.bmsg"
-            }
-          }
+          "name": "constant.character.escape.bmsg",
+          "match": "\\\\."
         }
       ]
     },
-    "i18n-annotation": {
-      "patterns": [
-        {
-          "name": "comment.line.double-slash.bmsg",
-          "match": "(//)\\s*\"([^\"]*\\p{Han}+[^\"]*)\"\\s*\\|\\s*\"([^\"]+)\"",
-          "captures": {
-            "1": { "name": "punctuation.definition.comment.bmsg" },
-            "2": { "name": "string.quoted.double.i18n-zh.bmsg" },
-            "3": { "name": "string.quoted.double.i18n-en.bmsg" }
-          }
-        }
-      ]
+    {
+      "name": "keyword.control.bmsg",
+      "match": "\\b(schema|package|namespace|message|enum|protocolVersion)\\b"
     },
-    "keywords": {
-      "patterns": [
-        {
-          "name": "keyword.control.schema.bmsg",
-          "match": "\\b(schema)\\b"
-        },
-        {
-          "name": "keyword.control.package.bmsg",
-          "match": "\\b(package)\\b"
-        },
-        {
-          "name": "keyword.control.enum.bmsg",
-          "match": "\\b(enum)\\b"
-        },
-        {
-          "name": "keyword.control.message.bmsg",
-          "match": "\\b(message)\\b"
-        }
-      ]
+    {
+      "name": "support.type.bmsg",
+      "match": "\\b(uint32|uint64|int32|int64|float32|float64|string|bool|bytes|list|map)\\b"
     },
-    "types": {
-      "patterns": [
-        {
-          "name": "support.type.bmsg",
-          "match": "\\b(uint32|uint64|int32|int64|float32|float64|string|bool|bytes)\\b"
-        }
-      ]
+    {
+      "name": "entity.name.type.bmsg",
+      "match": "(?<=message )\\w+|(?<=enum )\\w+"
     },
-    "generic-types": {
-      "patterns": [
-        {
-          "name": "support.type.generic.bmsg",
-          "match": "\\b(list|map)\\s*(<)",
-          "captures": {
-            "1": { "name": "support.type.bmsg" },
-            "2": { "name": "punctuation.definition.typeparameters.begin.bmsg" }
-          }
-        },
-        {
-          "name": "punctuation.definition.typeparameters.end.bmsg",
-          "match": ">"
-        }
-      ]
+    {
+      "name": "variable.other.field.bmsg",
+      "match": "\\b\\w+(?=\\s*=)"
     },
-    "enum-body": {
-      "patterns": [
-        {
-          "name": "entity.name.type.enum.bmsg",
-          "match": "(?<=enum\\s)\\w+"
-        },
-        {
-          "name": "entity.name.type.enum.bmsg",
-          "match": "(?<==\\s*)[A-Z][A-Z0-9_]+(?=\\s|$)",
-          "comment": "Enum value names (UPPER_CASE)"
-        }
-      ]
+    {
+      "name": "constant.numeric.bmsg",
+      "match": "-?\\b\\d+\\b"
     },
-    "message-body": {
-      "patterns": [
-        {
-          "name": "entity.name.type.message.bmsg",
-          "match": "(?<=message\\s)\\w+"
-        },
-        {
-          "name": "variable.other.field.bmsg",
-          "match": "(?<=\\s)\\w+(?=\\s*=)",
-          "comment": "Field name before = sign"
-        }
-      ]
+    {
+      "name": "keyword.operator.bmsg",
+      "match": "[=:<>|]"
     },
-    "strings": {
-      "patterns": [
-        {
-          "name": "string.quoted.double.bmsg",
-          "begin": "\"",
-          "end": "\"",
-          "patterns": [
-            {
-              "name": "constant.character.escape.bmsg",
-              "match": "\\\\."
-            }
-          ]
-        }
-      ]
-    },
-    "numbers": {
-      "patterns": [
-        {
-          "name": "constant.numeric.bmsg",
-          "match": "\\b\\d+(\\.\\d+)?\\b"
-        }
-      ]
-    },
-    "equals": {
-      "patterns": [
-        {
-          "name": "keyword.operator.assignment.bmsg",
-          "match": "="
-        }
-      ]
-    },
-    "tag-number": {
-      "patterns": [
-        {
-          "name": "constant.numeric.tag.bmsg",
-          "match": "(?<==\\s*)\\d+",
-          "comment": "Tag number after = sign"
-        }
-      ]
+    {
+      "name": "punctuation.section.bmsg",
+      "match": "[{}\\[\\],]"
     }
-  }
+  ]
 }

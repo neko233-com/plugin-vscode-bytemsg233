@@ -1,38 +1,89 @@
 {
   "name": "bytemsg233",
-  "displayName": "ByteMsg233 Language Support",
-  "description": "VS Code language support for legacy ByteMsg233 (.bmsg) schema files; new projects use .bmsg.json.",
-  "version": "1.0.0",
-  "publisher": "neko233",
+  "displayName": "ByteMsg233",
+  "description": "ByteMsg233 highlighting, completion, formatting, validation and multi-language code generation.",
+  "version": "1.1.0",
+  "publisher": "neko233-com",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neko233-com/bytemsg233-plugin-vscode"
+    "url": "https://github.com/neko233-com/plugin-vscode-bytemsg233"
   },
+  "icon": "images/icon.png",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Formatters",
+    "Other"
   ],
   "keywords": [
     "bytemsg233",
     "bmsg",
     "schema",
-    "serialization"
+    "serialization",
+    "codegen"
   ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:bmsg",
+    "onLanguage:bmsg-json",
+    "onLanguage:bmsg-yaml"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Highlighting and completion work in restricted mode; CLI execution requires workspace trust.",
+      "restrictedConfigurations": [
+        "bytemsg233.cliPath"
+      ]
+    }
+  },
+  "scripts": {
+    "check": "node --check extension.js",
+    "package": "vsce package",
+    "vscode:prepublish": "npm run check"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.0"
+  },
   "contributes": {
     "languages": [
       {
         "id": "bmsg",
         "aliases": [
-          "ByteMsg233",
-          "bmsg"
+          "ByteMsg233"
         ],
         "extensions": [
           ".bmsg"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "bmsg-json",
+        "aliases": [
+          "ByteMsg233 JSON"
+        ],
+        "extensions": [
+          ".bmsg.json"
+        ],
+        "configuration": "./json-language-configuration.json"
+      },
+      {
+        "id": "bmsg-yaml",
+        "aliases": [
+          "ByteMsg233 YAML"
+        ],
+        "extensions": [
+          ".bmsg.yaml",
+          ".bmsg.yml"
+        ],
+        "configuration": "./yaml-language-configuration.json"
       }
     ],
     "grammars": [
@@ -40,7 +91,116 @@
         "language": "bmsg",
         "scopeName": "source.bmsg",
         "path": "./syntaxes/bmsg.tmLanguage.json"
+      },
+      {
+        "language": "bmsg-json",
+        "scopeName": "source.bmsg-json",
+        "path": "./syntaxes/bmsg-json.tmLanguage.json"
+      },
+      {
+        "language": "bmsg-yaml",
+        "scopeName": "source.bmsg-yaml",
+        "path": "./syntaxes/bmsg-yaml.tmLanguage.json"
       }
-    ]
+    ],
+    "snippets": [
+      {
+        "language": "bmsg-json",
+        "path": "./snippets/json.json"
+      },
+      {
+        "language": "bmsg",
+        "path": "./snippets/bmsg.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "bytemsg233.generate",
+        "title": "ByteMsg233: Generate Languages…"
+      },
+      {
+        "command": "bytemsg233.export",
+        "title": "ByteMsg233: Export Documentation / Schema…"
+      },
+      {
+        "command": "bytemsg233.validate",
+        "title": "ByteMsg233: Validate Schema"
+      },
+      {
+        "command": "bytemsg233.updateCLI",
+        "title": "ByteMsg233: Update CLI"
+      },
+      {
+        "command": "bytemsg233.showOutput",
+        "title": "ByteMsg233: Show Output"
+      }
+    ],
+    "configuration": {
+      "title": "ByteMsg233",
+      "properties": {
+        "bytemsg233.cliPath": {
+          "type": "string",
+          "default": "bytemsg233",
+          "description": "CLI executable path. Arguments are passed directly, without a shell.",
+          "scope": "machine-overridable"
+        },
+        "bytemsg233.outputDirectory": {
+          "type": "string",
+          "default": "generated",
+          "description": "Default output path, relative to the workspace folder.",
+          "scope": "resource"
+        },
+        "bytemsg233.locale": {
+          "type": "string",
+          "enum": [
+            "en",
+            "zh"
+          ],
+          "default": "en",
+          "description": "Language used for generated comments.",
+          "scope": "resource"
+        },
+        "bytemsg233.validateOnChange": {
+          "type": "boolean",
+          "default": true,
+          "description": "Validate schema buffers after edits (500 ms debounce).",
+          "scope": "resource"
+        },
+        "bytemsg233.timeout": {
+          "type": "number",
+          "default": 30,
+          "minimum": 1,
+          "maximum": 600,
+          "description": "CLI timeout in seconds.",
+          "scope": "resource"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "bytemsg233.generate",
+          "when": "resourceFilename =~ /\\.bmsg(\\.(json|ya?ml))?$/ || resourceExtname == .proto",
+          "group": "bytemsg233@0"
+        },
+        {
+          "command": "bytemsg233.export",
+          "when": "resourceFilename =~ /\\.bmsg(\\.(json|ya?ml))?$/ || resourceExtname == .proto",
+          "group": "bytemsg233@1"
+        },
+        {
+          "command": "bytemsg233.validate",
+          "when": "resourceFilename =~ /\\.bmsg(\\.(json|ya?ml))?$/ || resourceExtname == .proto",
+          "group": "bytemsg233@2"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "bytemsg233.generate",
+          "when": "resourceFilename =~ /\\.bmsg(\\.(json|ya?ml))?$/ || resourceExtname == .proto",
+          "group": "bytemsg233"
+        }
+      ]
+    }
   }
 }

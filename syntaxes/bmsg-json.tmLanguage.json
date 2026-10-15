@@ -1,0 +1,9 @@
+{
+  "name": "ByteMsg233 JSON",
+  "scopeName": "source.bmsg-json",
+  "patterns": [
+    {
+      "include": "source.json"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "ByteMsg233 YAML",
+  "scopeName": "source.bmsg-yaml",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.bmsg",
+      "match": "#.*$"
+    },
+    {
+      "name": "entity.name.tag.bmsg",
+      "match": "\\b[\\w]+(?=\\s*:)"
+    },
+    {
+      "name": "string.quoted.double.bmsg",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.bmsg",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.single.bmsg",
+      "begin": "'",
+      "end": "'"
+    },
+    {
+      "name": "support.type.bmsg",
+      "match": "\\b(uint32|uint64|int32|int64|float32|float64|string|bool|bytes|list|map)\\b"
+    },
+    {
+      "name": "constant.numeric.bmsg",
+      "match": "\\b\\d+\\b"
+    },
+    {
+      "include": "source.yaml"
+    }
+  ]
+}

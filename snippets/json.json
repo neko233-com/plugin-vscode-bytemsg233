@@ -1,0 +1,28 @@
+{
+  "Schema": {
+    "prefix": "bmsg-schema",
+    "body": [
+      "{",
+      "  \"schema\": \"bymsg/v1\",",
+      "  \"package\": \"${1:game}\",",
+      "  \"${2:Hero}\": {",
+      "    \"id\": { \"type\": \"uint32\", \"tag\": 1 },",
+      "    \"name\": { \"type\": \"string\", \"tag\": 2 }",
+      "  }",
+      "}"
+    ],
+    "description": "ByteMsg233 schema"
+  },
+  "Field": {
+    "prefix": "bmsg-field",
+    "body": "\"${1:name}\": { \"type\": \"${2:string}\", \"tag\": ${3:1} }"
+  },
+  "List": {
+    "prefix": "bmsg-list",
+    "body": "\"${1:items}\": { \"list\": \"${2:Hero}\", \"tag\": ${3:1} }"
+  },
+  "Map": {
+    "prefix": "bmsg-map",
+    "body": "\"${1:attrs}\": { \"map\": [\"string\", \"${2:int32}\"], \"tag\": ${3:1} }"
+  }
+}
